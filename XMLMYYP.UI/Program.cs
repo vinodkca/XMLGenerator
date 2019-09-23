@@ -15,16 +15,23 @@ namespace XMLMYYP.UI
             InitializeService();
 
             catService.ShowBooks();           
-            Console.WriteLine("Enter four Letter BookCode or ALL to generate sitemaps");                
+            Console.WriteLine("Enter four Letter BookCode or ALL to generate sitemaps (except XSEO)");                
 
             string strBookCode = Console.ReadLine();
             if(strBookCode.Length == 0) return;
 
             strBookCode = strBookCode.ToUpper();
             Console.WriteLine("BookCode entered in UPPERCASE is:" + strBookCode);  
-                        
-            GenerateAllCategoryXML(strBookCode);   
-            GenerateAllProfileXML(strBookCode);     
+
+            if(strBookCode == "XSEO")   //Just do generation of profiles
+            {
+                GenerateAllProfileXML(strBookCode);          
+            } 
+            else
+            {
+                GenerateAllCategoryXML(strBookCode);   
+                GenerateAllProfileXML(strBookCode);     
+            }
         }
 
         private static void InitializeService()
@@ -39,9 +46,9 @@ namespace XMLMYYP.UI
             catService.GenerateCategoryXML(false, strBookCode);            
             Console.WriteLine($"END: Generating SM_Category for {strBookCode}");
 
-            Console.WriteLine($"START: Generating SM_Category_Map for {strBookCode}");
-            catService.GenerateCategoryXML(true, strBookCode);            
-            Console.WriteLine($"END: Generating SM_Category_Map for {strBookCode}");
+            // Console.WriteLine($"START: Generating SM_Category_Map for {strBookCode}");
+            // catService.GenerateCategoryXML(true, strBookCode);            
+            // Console.WriteLine($"END: Generating SM_Category_Map for {strBookCode}");
         }
 
         private static void GenerateAllProfileXML(string strBookCode)

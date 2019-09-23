@@ -12,7 +12,7 @@ namespace XMLMYYP.UI.BAL
         
         public CategoryService()
         {
-            catRepo = new CategoryRepository(AppSetting.connDIADSQL);
+            catRepo = new CategoryRepository(AppSetting.connPRODPROFILESQL);
         }
 
         public void GenerateCategoryXML(bool IsMap)
